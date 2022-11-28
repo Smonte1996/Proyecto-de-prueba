@@ -196,32 +196,6 @@ trait EnumeratesValues
     }
 
     /**
-     * Determine if an item exists, using strict comparison.
-     *
-     * @param  (callable(TValue): bool)|TValue|array-key  $key
-     * @param  TValue|null  $value
-     * @return bool
-     */
-    public function containsStrict($key, $value = null)
-    {
-        if (func_num_args() === 2) {
-            return $this->contains(fn ($item) => data_get($item, $key) === $value);
-        }
-
-        if ($this->useAsCallable($key)) {
-            return ! is_null($this->first($key));
-        }
-
-        foreach ($this as $item) {
-            if ($item === $key) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Dump the items and end the script.
      *
      * @param  mixed  ...$args
@@ -980,12 +954,12 @@ trait EnumeratesValues
             return $items->all();
         } elseif ($items instanceof Arrayable) {
             return $items->toArray();
+        } elseif ($items instanceof Traversable) {
+            return iterator_to_array($items);
         } elseif ($items instanceof Jsonable) {
             return json_decode($items->toJson(), true);
         } elseif ($items instanceof JsonSerializable) {
             return (array) $items->jsonSerialize();
-        } elseif ($items instanceof Traversable) {
-            return iterator_to_array($items);
         } elseif ($items instanceof UnitEnum) {
             return [$items];
         }
