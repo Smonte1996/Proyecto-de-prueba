@@ -38,13 +38,13 @@ class RegistarController extends Controller
       ]);
 
       //Autenticar a usuario
-      auth()->attempt([
-         'email'=>$request->email,
-         'password'=>$request->password
-      ]);
+      // auth()->attempt([
+      //    'email'=>$request->email,
+      //    'password'=>$request->password
+      // ]);
 
       //otra forma de autenticar 
-     //auth()->attempt($request->only('email','password'));
+      auth()->attempt($request->only('email','password'));
 
     //redireccionar al usuario
      return redirect()->route('posts.index');

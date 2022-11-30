@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistarController;
 
@@ -29,4 +30,10 @@ Route::post('/login', [LoginController::class, 'store']);
 //la ruta de cierre e session
 route::post('/logout', [LogoutController::class,'store'])->name('logout');
 // la ruta del muro de la pagina | manda el parametro de usermane es lo que reflija en la url.
-Route::get('/{User:username}',[PostsController::class, 'index'])->name('posts.index');
+Route::get('/{user:username}',[PostsController::class, 'index'])->name('pots.index');
+//se crea la ruta para crear un post
+Route::get('/posts/create',[PostsController::class, 'create'])->name('posts.create');
+//se crea la ruta de guarado de las publicaciones.
+Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
+//se crea la ruta para subir la imagen en dropzone
+Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagen.store');

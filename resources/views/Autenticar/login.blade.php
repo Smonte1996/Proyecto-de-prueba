@@ -10,7 +10,7 @@
     <img src="{{asset('img/react.png')}}" alt="Imagen login">
     </div> 
     <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-xl">
-      <form  action="{{route('login')}}" method="POST">
+      <form  action="{{ route('login') }}" method="post" novalidate>
         @csrf
        @if (session('mensaje'))
        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2">{{session('mensaje')}}</p> 
