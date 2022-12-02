@@ -8,7 +8,7 @@ use Intervention\Image\Facades\Image;
 
 class ImagenController extends Controller
 {
-    //se crea el store para poder guardar la url de la imagen en la base y se le da tamaño.
+    //se crea el store para poder guardar la url de la imagen en la base y se le da tamaño y se crea tbm el nombre unico que va ah tener a imagen.
     public function store(Request $request)
     {
         $imagen = $request -> file('file');
