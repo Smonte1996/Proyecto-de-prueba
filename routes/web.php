@@ -7,6 +7,8 @@ use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegistarController;
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\perfilController;
 
@@ -20,10 +22,8 @@ use App\Http\Controllers\perfilController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+//ruta principal de la pagina de inicio.
+Route::get('/', HomeController::class)->name('home');
 //ruta del controlador para el formulario de registro 
 Route::get('/Register',[RegistarController::class, 'registar'])->name('Register');
 Route::post('/Register',[RegistarController::class, 'store']);
@@ -53,3 +53,7 @@ Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagen.store
 Route::post('/posts/{post}/likes',[LikeController::class, 'store'])->name('posts.likes.store');
 //se crea la ruta para eliminar los likes 
 Route::delete('/posts/{post}/likes',[LikeController::class, 'destroy'])->name('posts.likes.destroy');
+// siguiendo a usuarios
+Route::post('/{user:username}/follow',[FollowerController::class, 'store'])->name('users.follow');
+//eliminar segidor
+Route::delete('/{user:username}/follow',[FollowerController::class, 'destroy'])->name('users.unfollow');

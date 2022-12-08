@@ -12,7 +12,7 @@
     
     <header class="p-5 border-b bg-white shadow">
         <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-3xl font-black">DevStraGram</h1>
+        <a href="<?php echo e(route('home')); ?>" class="text-3xl font-black">DevStraGram</a>
          <?php if(auth()->guard()->check()): ?>
          <nav class="flex gap-2 items-center">
             <a href="<?php echo e(route('posts.create')); ?>" class="flex items-center gap-2 bg-white border p-2 text-gray-600 rounded text-sm uppercase font-bold cursor-pointer">
