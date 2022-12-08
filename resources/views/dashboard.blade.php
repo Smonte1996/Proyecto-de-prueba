@@ -9,7 +9,7 @@
      <div class="flex justify-center">
         <div class="w-full md:w-8/12 lg:w-6/12 flex items-center md:flex-row">
             <div class="w-8/12 lg:w-6/12 px-5">
-           <img src="{{asset('img/usuario.svg')}}" alt="imagen usuario">
+           <img src="{{$user->imagen ? asset('Perfiles') . '/'. $user->imagen : asset('img/usuario.svg')}}" alt="imagen usuario">
             </div>
             <div class="md:w-8/12 lg:w-6/12 px-5 md:flex md:flex-col items-center md:justify-center py-10 md:items-start">
             <div class="flex items-center gap-3">
@@ -25,15 +25,34 @@
                 @endif
             @endauth
         </div>
-            <p class="text-gray-800 text-sm mb-3 font-bold mt-5">0
-            <span class="font-normal"> Seguidores</span></p>
+            <p class="text-gray-800 text-sm mb-3 font-bold mt-5">{{$user->followers->count()}}
+            <span class="font-normal"> @choice('Seguidor|Seguidores', $user->followers->count())</span></p>
 
-            <p class="text-gray-800 text-sm mb-3 font-bold">0
-            <span class="font-normal"> Seguiendo</span></p>
+            <p class="text-gray-800 text-sm mb-3 font-bold">{{$user->followings->count()}}
+            <span class="font-normal"> Siguiendo</span></p>
                 
             <p class="text-gray-800 text-sm mb-3 font-bold">{{$posts->count()}}
             <span class="font-normal"> Posts</span></p>
-                
+            @auth
+            @if ($user->id !== auth()->user()->id) 
+               @if (!$user->siguiendo(auth()->user()))
+             <form action="{{route('users.follow', $user)}}" method="POST">
+            @csrf
+            <input type="submit" class="bg-blue-600 text-white uppercase rounded-lg px-3 py-1
+            text-xs font-bold cursor-pointer" value="seguir">  
+            </form>
+
+             @else
+
+            <form action="{{route('users.unfollow', $user)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="submit" class="bg-red-600 text-white uppercase rounded-lg px-3 py-1
+                text-xs font-bold cursor-pointer" value="Dejar de seguir">  
+                </form>    
+                @endif 
+             @endif
+            @endauth   
             </div>
         </div>
     </div>   
