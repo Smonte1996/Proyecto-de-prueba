@@ -7,6 +7,8 @@
     <title>DevstAgRaM - <?php echo $__env->yieldContent('titulos'); ?></title>
     <?php echo app('Illuminate\Foundation\Vite')('resources/css/app.css'); ?>
     <?php echo app('Illuminate\Foundation\Vite')('resources/js/app.js'); ?>
+    <?php echo \Livewire\Livewire::styles(); ?>
+
 </head>
 <body class="bg-gray-100">
     
@@ -48,5 +50,7 @@
      DevStraGram - Todo los derechos resrvado &copy; <?php echo e(now()->year); ?>
 
     </footer>
+    <?php echo \Livewire\Livewire::scripts(); ?>
+
 </body>
 </html><?php /**PATH C:\Users\SMontenegroT\Desktop\Devstragram1\resources\views/layouts/app.blade.php ENDPATH**/ ?>

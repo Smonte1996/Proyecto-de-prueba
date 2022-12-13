@@ -17,7 +17,7 @@ public function __construct()
 
 public function index(User $user)
 { 
-    $posts = Post::where('user_id', $user->id)->paginate(8); //mandamos la visializacion de los posts exatrallendo el user_id y el paginado 
+    $posts = Post::where('user_id', $user->id)->latest()->paginate(8); //mandamos la visializacion de los posts exatrallendo el user_id y el paginado 
 
     return view('dashboard',[
         'user' => $user,
